@@ -9,6 +9,6 @@ The "concert-this" command lets you access town artist events API in order to ge
 artist the user input. Information like: Name of the venue, venue location and the date and time of the concert.
 The "do what it says" command reads a .txt file and does whatever the file says to do.
 
-![Screenshot 1](https://coachO88.github.io/LIRI-node-app/screenshot/pic1.png)
+![Screenshot 1](https://raw.githubusercontent.com/coachO88/LIRI-node-app/master/screenshot/pic1.png)
 
-![Screenshot 2](https://coachO88.github.io/LIRI-node-app/screenshot/pic2.png)
+![Screenshot 2](https://raw.githubusercontent.com/coachO88/LIRI-node-app/screenshot/pic2.png)
