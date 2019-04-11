@@ -11,4 +11,4 @@ The "do what it says" command reads a .txt file and does whatever the file says 
 
 ![Screenshot 1](https://raw.githubusercontent.com/coachO88/LIRI-node-app/master/screenshot/pic1.png)
 
-![Screenshot 2](https://raw.githubusercontent.com/coachO88/LIRI-node-app/screenshot/pic2.png)
+![Screenshot 2](https://raw.githubusercontent.com/coachO88/LIRI-node-app/master/screenshot/pic2.png)
