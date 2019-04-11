@@ -8,32 +8,52 @@ var fs = require('fs')
 var command = process.argv[2];
 var value = process.argv[3];
 
-if (command=="movie-this"){
+function decide(command, value){
+  if (command == "movie-this"){
+    getMovie(value);
+  }
+  
 
-    axios.get("http://www.omdbapi.com/?t=" + value + "&y=&plot=short&apikey=trilogy").then(
-  function(response) {
-    
-    console.log("Title of Movie: " + response.data.Title + "\nYear Movie Came Out: " + response.data.Year + "\nIMBD Rating of the Movie: " + response.data.imdbRating
-    + "\nRotten Tomatoes Rating of the Movie: " + response.data.Ratings[0].Value + "\nCountry Where the Movie Was Produced: " + response.data.Country +
-    "\nLanguage of the Movie: " + response.data.Language + "\nPlot of the Movie: " + response.data.Plot + "\nActors in the Movie: " + response.data.Actors);
-    }
-    );
+  if(command == "concert-this"){
+    getConcert(value);
+  }
+
+  if(command == "spotify-this-song"){
+    getSong(value);
+  }
+
+  if(command == "do-what-it-says"){
+    doThis();
 }
 
+}
+function getMovie(value){
+  if (value === undefined){
+    value = "Mr. Nobody"
+  }
 
-if (command=="concert-this"){
-
+  axios.get("http://www.omdbapi.com/?t=" + value + "&y=&plot=short&apikey=trilogy").then(
+    function(response) {
+      
+      console.log("Title of Movie: " + response.data.Title + "\nYear Movie Came Out: " + response.data.Year + "\nIMBD Rating of the Movie: " + response.data.imdbRating
+      + "\nRotten Tomatoes Rating of the Movie: " + response.data.Ratings[0].Value + "\nCountry Where the Movie Was Produced: " + response.data.Country +
+      "\nLanguage of the Movie: " + response.data.Language + "\nPlot of the Movie: " + response.data.Plot + "\nActors in the Movie: " + response.data.Actors);
+      }
+      );
+}
+function getConcert(value){
   axios.get("https://rest.bandsintown.com/artists/" + value + "/events?app_id=codingbootcamp").then(
-function(response) {
-      console.log("Artist Name: " + response.data[0].lineup[0] + "\nName of the venue: " + response.data[0].venue.name
-                  + "\nVenue location: " + response.data[0].venue.city + ", " + response.data[0].venue.region +
-                  "\nDate of the Event: " + moment(response.data[0].datatime).format('MMMM Do YYYY, h:mm:ss a'))
-  });
+    function(response) {
+          console.log("Artist Name: " + response.data[0].lineup[0] + "\nName of the venue: " + response.data[0].venue.name
+                      + "\nVenue location: " + response.data[0].venue.city + ", " + response.data[0].venue.region +
+                      "\nDate of the Event: " + moment(response.data[0].datatime).format('MMMM Do YYYY, h:mm:ss a'))
+      });
 }
 
-
-  if (command=="spotify-this-song"){
-
+function getSong(value){
+  if (value=== undefined){
+    value= "The Sign"
+  }
   spotify.search({type: 'track', query: value }, function(err, data){
     if (err){
       return console.log("Error Occured: " + err)
@@ -43,18 +63,19 @@ function(response) {
    });
 }
 
-if (command === "do-what-it-says") {
-
+function doThis(){
   fs.readFile("random.txt", "utf8", function read(error, data) {
     if (error) {
       return console.log('Error occurred: ' + error);
     }
     let dataArr = data.split(",")
-    console.log(dataArr)
   
-    command = dataArr[0];
-    value = dataArr[1];
-    console.log(command)
-    console.log(value)
+    let command = dataArr[0];
+    let value = dataArr[1];
+
+    decide(command, value);
   });
-};
+
+}
+
+decide(command, value);
